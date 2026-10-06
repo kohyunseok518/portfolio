@@ -1,0 +1,228 @@
+:root {
+  --bg: #f5f6f8;
+  --paper: #ffffff;
+  --text: #1c1d22;
+  --sub: #5d6070;
+  --muted: #8a8d9c;
+  --line: #e6e7ec;
+  --soft: #f7f8fa;
+  --accent: #4f46e5;
+  --accent-soft: #eef0ff;
+  --hl: #3b37c9;
+  --chip: #2b2d36;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+a { color: inherit; }
+
+.page {
+  max-width: 880px;
+  margin: 40px auto;
+  padding: 56px 64px;
+  background: var(--paper);
+  border-radius: 18px;
+  box-shadow: 0 2px 24px rgba(20, 22, 40, 0.06);
+}
+
+/* 머리 */
+.profile {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--line);
+}
+
+.avatar {
+  flex: none;
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(140deg, #6d63f0, #4338ca);
+  color: #fff;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.profile h1 { margin: 0 0 10px; font-size: 30px; letter-spacing: -0.5px; }
+.profile h1 small { font-size: 18px; color: var(--sub); font-weight: 500; margin-left: 6px; }
+.profile .role { margin: 0 0 10px; color: var(--accent); font-weight: 600; }
+.contacts { list-style: none; margin: 0; padding: 0; font-size: 14px; }
+.contacts li { display: flex; gap: 10px; align-items: center; }
+.contacts i { width: 16px; color: var(--sub); text-align: center; }
+
+/* 섹션 */
+section { margin-top: 44px; }
+
+h2 {
+  margin: 0 0 18px;
+  padding-left: 12px;
+  border-left: 4px solid var(--accent);
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.intro p { margin: 0 0 12px; color: #33343c; }
+
+.stack { width: 100%; border-collapse: collapse; font-size: 14px; }
+.stack th { width: 150px; text-align: left; padding: 7px 10px; vertical-align: top; color: var(--text); }
+.stack td { padding: 7px 10px; color: #3b3d46; }
+
+/* 프로젝트 카드 */
+.card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+  margin-bottom: 22px;
+}
+
+.card .period { color: var(--muted); font-size: 13px; margin: 0; }
+.card h3 { margin: 4px 0 2px; font-size: 21px; letter-spacing: -0.3px; }
+.card .where { margin: 0 0 12px; color: var(--sub); font-size: 14px; font-style: italic; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; padding: 0; list-style: none; }
+.chips li { background: var(--chip); color: #fff; font-size: 12px; padding: 2px 9px; border-radius: 6px; }
+
+.links { display: flex; flex-wrap: wrap; gap: 14px; margin: 0 0 12px; font-size: 14px; }
+.links a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.links a:hover { text-decoration: underline; }
+
+.points { margin: 0 0 16px; padding-left: 18px; }
+.points li { margin-bottom: 4px; }
+.points li::marker { color: var(--accent); }
+.hl { color: var(--hl); font-weight: 700; }
+
+.detail-btn {
+  border: 1px solid var(--accent);
+  background: #fff;
+  color: var(--accent);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.detail-btn:hover { background: var(--accent-soft); }
+
+/* 기타 */
+.plain { margin: 0; padding-left: 18px; }
+.plain li { margin-bottom: 8px; }
+.plain .desc { display: block; color: var(--sub); font-size: 13px; }
+
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.two h4 { margin: 0 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.two p { margin: 0 0 10px; font-size: 14px; }
+.two .desc { display: block; color: var(--sub); font-size: 13px; }
+
+.todo { color: var(--muted); font-style: italic; }
+
+footer { margin-top: 48px; text-align: center; color: var(--muted); font-size: 12px; }
+
+/* 상세 창 */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 16, 28, 0.55);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 16px;
+  overflow-y: auto;
+  z-index: 10;
+}
+.overlay.is-open { display: flex; }
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 48px 52px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: var(--soft);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.eyebrow { margin: 0; color: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: 0.3px; }
+.modal h3 { margin: 6px 0 4px; font-size: 23px; letter-spacing: -0.4px; }
+.modal .meta { margin: 0 0 22px; color: var(--sub); font-size: 14px; }
+
+.modal h4 {
+  margin: 30px 0 12px;
+  padding-left: 12px;
+  border-left: 4px solid var(--accent);
+  font-size: 17px;
+}
+
+.modal p { margin: 0 0 10px; }
+.modal ul { margin: 0; padding-left: 18px; }
+.modal figure { margin: 14px 0 6px; }
+.modal figure img { width: 100%; border-radius: 10px; border: 1px solid var(--line); }
+.modal figcaption { color: var(--muted); font-size: 12px; margin-top: 6px; }
+
+.ts {
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin-bottom: 14px;
+}
+.ts h5 { margin: 0 0 12px; font-size: 15px; }
+.ts dl { margin: 0; display: grid; grid-template-columns: 54px 1fr; gap: 8px 14px; }
+.ts dt { color: var(--accent); font-size: 13px; font-weight: 700; padding-top: 2px; }
+.ts dd { margin: 0; font-size: 14px; color: #33343c; }
+.ts .learn { margin: 12px 0 0; padding-top: 10px; border-top: 1px dashed var(--line); font-size: 13px; color: var(--sub); }
+
+code {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.88em;
+  background: var(--accent-soft);
+  color: var(--hl);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+@media (max-width: 720px) {
+  .page { margin: 0; padding: 32px 20px; border-radius: 0; }
+  .profile { flex-direction: column; align-items: flex-start; }
+  .two { grid-template-columns: 1fr; }
+  .modal { padding: 40px 20px; }
+  .ts dl { grid-template-columns: 1fr; gap: 2px; }
+  .ts dd { margin-bottom: 8px; }
+  .stack th { width: 110px; }
+}
+
+@media print {
+  body { background: #fff; }
+  .page { box-shadow: none; margin: 0; }
+  .detail-btn, .overlay { display: none !important; }
+}

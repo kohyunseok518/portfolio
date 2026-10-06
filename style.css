@@ -153,7 +153,7 @@ footer { margin-top: 48px; text-align: center; color: var(--muted); font-size: 1
 .modal {
   position: relative;
   width: 100%;
-  max-width: 900px;
+  max-width: 760px;
   background: #fff;
   border-radius: 18px;
   padding: 48px 52px;
@@ -189,18 +189,27 @@ footer { margin-top: 48px; text-align: center; color: var(--muted); font-size: 1
 .modal figure img { width: 100%; border-radius: 10px; border: 1px solid var(--line); }
 .modal figcaption { color: var(--muted); font-size: 12px; margin-top: 6px; }
 
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 4px 0 18px; }
+.stats div { background: var(--accent-soft); border-radius: 12px; padding: 14px 12px; text-align: center; }
+.stats b { display: block; font-size: 20px; color: var(--hl); letter-spacing: -0.3px; }
+.stats span { font-size: 12px; color: var(--sub); }
+
+.summary { color: #33343c; }
+
 .ts {
-  background: var(--soft);
   border: 1px solid var(--line);
   border-radius: 12px;
-  padding: 20px 22px;
-  margin-bottom: 14px;
+  padding: 18px 20px 14px;
+  margin-bottom: 12px;
 }
-.ts h5 { margin: 0 0 12px; font-size: 15px; }
-.ts dl { margin: 0; display: grid; grid-template-columns: 54px 1fr; gap: 8px 14px; }
-.ts dt { color: var(--accent); font-size: 13px; font-weight: 700; padding-top: 2px; }
-.ts dd { margin: 0; font-size: 14px; color: #33343c; }
-.ts .learn { margin: 12px 0 0; padding-top: 10px; border-top: 1px dashed var(--line); font-size: 13px; color: var(--sub); }
+.ts h5 { margin: 0 0 10px; font-size: 15.5px; }
+.ts dl { margin: 0; display: grid; grid-template-columns: 40px 1fr; gap: 6px 12px; }
+.ts dt { color: var(--accent); font-size: 13px; font-weight: 700; padding-top: 1px; }
+.ts dd { margin: 0; font-size: 14px; line-height: 1.65; color: #33343c; }
+.ts dd b { color: var(--hl); }
+.more { display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 600; color: var(--accent); text-decoration: none; }
+.more:hover { text-decoration: underline; }
+.more.is-soon { color: var(--muted); font-weight: 500; pointer-events: none; }
 
 code {
   font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -218,6 +227,7 @@ code {
   .modal { padding: 40px 20px; }
   .ts dl { grid-template-columns: 1fr; gap: 2px; }
   .ts dd { margin-bottom: 8px; }
+  .stats { grid-template-columns: 1fr; }
   .stack th { width: 110px; }
 }
 

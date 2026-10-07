@@ -90,7 +90,7 @@
         <p class="lead">금융 질문 답변(RAG)과 소비 분석·회고 대화를 처리하는 AI 서버</p>
         <ul class="points">
           <li>질문 29개의 점수 분포를 실측해 유사도 하한 0.48 적용, <span class="hl">근거 없는 질문 11/14 차단</span></li>
-          <li>하한에 막힌 정답 질문은 BM25+벡터 하이브리드(RRF)로 <span class="hl">8개 모두 해결</span>, 무관한 질문 오탐은 코사인 이중 게이트로 차단</li>
+          <li>하한에 막힌 정답 질문은 BM25+벡터 하이브리드(RRF)와 문서 보강으로 <span class="hl">8개 모두 해결</span>, 무관한 질문 오탐은 코사인 이중 게이트로 차단</li>
           <li>소비 분석이 틀린 금융 한도로 답하는 것을 발견해 범위 밖 질문 안내와 천·만·억 단위 <span class="hl">숫자 검사 추가</span></li>
         </ul>
         <a class="detail-link" href="./projects/sottaejap.html">구조도 · 검색 게이트 · 실제 응답 보기 <i class="fa-solid fa-arrow-right"></i></a>

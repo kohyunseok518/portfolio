@@ -26,7 +26,7 @@
     <section class="intro">
       <h2>짧은 소개</h2>
       <p>가입자 445명이 쓴 대학 축제 소개팅 서비스를 직접 설계·배포·운영한 백엔드 개발자, 고현석입니다.</p>
-      <p><span class="hl">부하·동시성·무중단 배포</span> 문제를 실제 트래픽에서 측정하고 재현해서 해결했고, <span class="hl">RAG 기반 AI 서버</span>에서는 검색·근거 품질을 지표로 재며 개선했습니다.</p>
+      <p><span class="hl">부하·동시성·배포 안정성</span> 문제를 실제 트래픽에서 측정하고 재현해서 해결했고, <span class="hl">RAG 기반 AI 서버</span>에서는 검색·근거 품질을 지표로 재며 개선했습니다.</p>
       <p>지표가 좋아 보여도 다시 검증하는 습관으로, 팀이 믿고 배포할 수 있는 코드를 만들고 싶습니다.</p>
     </section>
 
@@ -57,7 +57,7 @@
           <li>쿼리별 DB 시간을 재서 탐색 목록 10초 캐시·DB 명령 40% 축소, 900명 부하에서 <span class="hl">p95 0.98초 → 0.07초, 서버 4대 → 2대</span></li>
           <li>콕 한도 잠금의 대기를 분석해 검사를 잠금 앞으로 옮기고 인덱스 추가, <span class="hl">처리 한계 초당 40~50건 → 60~90건</span></li>
           <li>GitHub Actions + SSM으로 이미지 digest를 고정한 롤링 배포, <span class="hl">행사 중 서비스를 내리지 않고 5번 배포</span></li>
-          <li>첫날 웹 푸시 미발송을 로그로 추적해 당일 수정, 3일간 <span class="hl">서버 오류 0.002%</span>(배포 시각 제외)</li>
+          <li>첫날 웹 푸시 미발송을 로그로 추적해 약 10시간 만에 수정, 3일간 <span class="hl">서버 오류 0.002%</span>(배포 시각 제외)</li>
         </ul>
         <a class="detail-link" href="./projects/facecook.html">화면 · 구조도 · 전후 비교 보기 <i class="fa-solid fa-arrow-right"></i></a>
       </article>

@@ -210,7 +210,6 @@ footer { margin-top: 48px; text-align: center; color: var(--muted); font-size: 1
 .ts dd b { color: var(--hl); }
 .more { display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 600; color: var(--accent); text-decoration: none; }
 .more:hover { text-decoration: underline; }
-.more.is-soon { color: var(--muted); font-weight: 500; pointer-events: none; }
 
 code {
   font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;

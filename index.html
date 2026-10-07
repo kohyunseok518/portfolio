@@ -26,7 +26,7 @@
     <section class="intro">
       <h2>짧은 소개</h2>
       <p>가입자 445명이 쓴 대학 축제 소개팅 서비스를 직접 설계·배포·운영한 백엔드 개발자, 고현석입니다.</p>
-      <p>부하, 동시성, 무중단 배포, 운영 중 장애처럼 실제 트래픽에서 생긴 문제를 측정하고 재현해서 해결했습니다.</p>
+      <p><span class="hl">부하·동시성·무중단 배포</span> 문제를 실제 트래픽에서 측정하고 재현해서 해결했고, <span class="hl">RAG 기반 AI 서버</span>에서는 검색·근거 품질을 지표로 재며 개선했습니다.</p>
       <p>지표가 좋아 보여도 다시 검증하는 습관으로, 팀이 믿고 배포할 수 있는 코드를 만들고 싶습니다.</p>
     </section>
 
@@ -35,7 +35,8 @@
       <table class="stack">
         <tr><th>Language</th><td>Java, Python</td></tr>
         <tr><th>Framework</th><td>Spring Boot, Spring Data JPA, FastAPI</td></tr>
-        <tr><th>Database</th><td>MySQL</td></tr>
+        <tr><th>Database</th><td>MySQL, Redis</td></tr>
+        <tr><th>AI</th><td>OpenAI API, LangChain, RAG(BM25, FAISS, pgvector)</td></tr>
         <tr><th>Infra</th><td>AWS(EC2, ALB, Auto Scaling, RDS, ElastiCache, S3, CloudWatch), GitHub Actions, Docker</td></tr>
       </table>
     </section>
@@ -47,44 +48,52 @@
         <p class="period">2026.09 ~ 2026.10 · BE 2명 / FE 2명</p>
         <h3>콕찔러보기 — 대학 축제 소개팅 서비스</h3>
         <p class="where">팀장, 백엔드·인프라</p>
+        <a href="./projects/facecook.html"><img class="thumb" src="./img/facecook/architecture-light.svg" alt="콕찔러보기 AWS 구성: ALB, 자동 확장 EC2, RDS MySQL, ElastiCache Redis"></a>
         <ul class="chips">
-          <li>Java 21</li><li>Spring Boot 3</li><li>JPA</li><li>MySQL</li><li>Redis</li><li>WebSocket(STOMP)</li><li>Flyway</li><li>AWS</li><li>GitHub Actions</li><li>Next.js</li>
+          <li>Java 21</li><li>Spring Boot 3</li><li>JPA</li><li>MySQL</li><li>Redis</li><li>WebSocket(STOMP)</li><li>AWS</li><li>GitHub Actions</li>
         </ul>
-        <div class="links">
-          <a href="https://github.com/seoil-power-rangers"><i class="fa-brands fa-github"></i> Organization</a>
-          <a href="https://github.com/seoil-power-rangers/facecook-be"><i class="fa-solid fa-server"></i> Backend</a>
-          <a href="https://github.com/seoil-power-rangers/facecook-fe"><i class="fa-solid fa-mobile-screen"></i> Frontend</a>
-        </div>
-        <p class="lead">축제 3일(09.30 ~ 10.02) 운영 기준 가입자 <span class="hl">445명</span>, 매칭 <span class="hl">463건</span>, 채팅 메시지 <span class="hl">6,156건</span> 기록</p>
+        <p class="lead">축제 3일 운영, 가입자 <span class="hl">445명</span> · 매칭 <span class="hl">463건</span> · 채팅 <span class="hl">6,156건</span></p>
         <ul class="points">
-          <li>900명 부하 테스트에서 탐색 API 지연 확인, 쿼리별 DB 시간을 측정해 DB 시간의 33%를 쓰던 탐색 목록을 10초 캐시하고 DB 명령 수를 40% 줄여 p95 <span class="hl">0.98초 → 0.07초</span>, 필요한 서버 4대 → 2대</li>
-          <li>행사 전체 콕 한도 잠금에 요청이 줄 서는 병목을 잠금 대기 분석으로 찾아, 검사를 잠금 앞으로 옮기고 인덱스를 추가해 처리 한계 초당 <span class="hl">40~50건 → 60~90건</span>, 동시 처리 제한으로 몰림 중 다른 API 응답 2초 → 21ms 유지</li>
-          <li>GitHub Actions + SSM으로 이미지 digest를 고정하고 서버를 한 대씩 교체하는 롤링 배포 구현, 행사 중 서비스를 내리지 않고 <span class="hl">5번 배포</span></li>
-          <li>첫날 웹 푸시 미발송을 로그로 추적해 AI 코드 변경 중 바뀐 초기화 순서를 원인으로 확인, 회귀 테스트와 함께 그날 밤 수정 배포 후 같은 오류 <span class="hl">0건</span></li>
-          <li>3일간 요청 44만 건 중 배포 시각 외 서버 오류 <span class="hl">8건(0.002%)</span>, 응답 p95 중앙값 28ms로 운영</li>
+          <li>쿼리별 DB 시간을 재서 탐색 목록 10초 캐시·DB 명령 40% 축소, 900명 부하에서 <span class="hl">p95 0.98초 → 0.07초, 서버 4대 → 2대</span></li>
+          <li>콕 한도 잠금의 대기를 분석해 검사를 잠금 앞으로 옮기고 인덱스 추가, <span class="hl">처리 한계 초당 40~50건 → 60~90건</span></li>
+          <li>GitHub Actions + SSM으로 이미지 digest를 고정한 롤링 배포, <span class="hl">행사 중 서비스를 내리지 않고 5번 배포</span></li>
+          <li>첫날 웹 푸시 미발송을 로그로 추적해 당일 수정, 3일간 <span class="hl">서버 오류 0.002%</span>(배포 시각 제외)</li>
         </ul>
-        <button type="button" class="detail-btn" data-detail="detail-facecook">자세히 보기 <i class="fa-solid fa-arrow-right"></i></button>
+        <a class="detail-link" href="./projects/facecook.html">화면 · 구조도 · 전후 비교 보기 <i class="fa-solid fa-arrow-right"></i></a>
       </article>
 
       <article class="card">
         <p class="period">2026.07 ~ 2026.08 · BE 2명 / FE 2명 / AI 1명</p>
         <h3>FirstFolio — 금융교육 서비스의 RAG 기반 AI 서버</h3>
         <p class="where">AI 서버 전담</p>
+        <a href="./projects/firstfolio.html"><img class="thumb" src="./img/firstfolio/rag-pipeline.svg" alt="FirstFolio RAG 처리 흐름: 청킹, BM25·FAISS 색인, 하이브리드 검색, 근거 제약 생성, 4단계 검증"></a>
         <ul class="chips">
-          <li>Python</li><li>FastAPI</li><li>OpenAI API</li><li>BM25(Kiwi)</li><li>FAISS</li><li>MySQL</li><li>S3</li><li>Docker</li>
+          <li>Python</li><li>FastAPI</li><li>OpenAI API</li><li>LangChain</li><li>BM25(Kiwi)</li><li>FAISS</li><li>MySQL</li><li>S3</li>
         </ul>
-        <div class="links">
-          <a href="https://github.com/KB7-25-2/FirstFolio-AI"><i class="fa-brands fa-github"></i> AI Server</a>
-        </div>
-        <p class="lead">금융 교과서·뉴스 검색 기반 퀴즈 생성 서버, 쓸 수 있는 근거 비율 <span class="hl">60% → 91%</span> 달성</p>
+        <p class="lead">금융 교과서·뉴스 RAG 기반 퀴즈 등 콘텐츠 생성 서버</p>
         <ul class="points">
-          <li>퀴즈 근거가 제목 조각으로 잘리는 원인을 청킹에서 찾아 교과서 구조 기반 병합 적용, 근거 비율 <span class="hl">60% → 91%</span>, 벡터 검색 Hit@5 88.5% → 92.3%</li>
-          <li>개발 세트 지표를 모두 올린 가중치 후보를 별도 질문 26개로 재검증해 정답률 <span class="hl">84.6% → 80.8%</span> 하락 확인, 과적합으로 판단해 운영 설정 유지</li>
-          <li>검색된 청크의 문장만 고를 수 있도록 응답 스키마를 실행 중에 생성해 근거 없는 인용을 차단, 코드 규칙 → 의미 중복 → 금융 수치 → LLM 순서의 단계별 검증 구성</li>
-          <li>재색인 중 문서 하나(<span class="hl">108개 청크</span>)가 벡터 색인에서 빠진 것을 측정 중 발견, 색인 정합성 검사를 추가해 누락을 감지</li>
-          <li>외부 API를 테스트 대역으로 바꿔 테스트 <span class="hl">474개</span>로 청킹·검색·생성·검증 확인</li>
+          <li>퀴즈 근거가 제목 조각으로 잘리는 원인을 청킹에서 찾아 교과서 구조 기반 병합, <span class="hl">쓸 수 있는 근거 60% → 91%</span></li>
+          <li>개발 세트 지표를 올린 가중치 후보를 별도 질문 26개로 재검증, <span class="hl">Hit@5 84.6% → 80.8% 하락</span>을 확인해 채택하지 않음</li>
+          <li>검색된 청크의 문장만 고르게 하는 응답 스키마와 4단계 검증(코드 → 의미 중복 → 수치 → LLM)으로 <span class="hl">근거 없는 인용 차단</span></li>
         </ul>
-        <button type="button" class="detail-btn" data-detail="detail-firstfolio">자세히 보기 <i class="fa-solid fa-arrow-right"></i></button>
+        <a class="detail-link" href="./projects/firstfolio.html">처리 흐름 · 실험 표 · 생성 예시 보기 <i class="fa-solid fa-arrow-right"></i></a>
+      </article>
+
+      <article class="card">
+        <p class="period">2026.09 · BE 2명 / FE 2명 / AI 1명</p>
+        <h3>소때잡 — 소비 회고 서비스의 AI 챗봇 서버</h3>
+        <p class="where">AI 서버 담당 · 2026 KB IT's Your Life 해커톤 장려상</p>
+        <a href="./projects/sottaejap.html"><img class="thumb" src="./img/sottaejap/retrieval-gate.svg" alt="소때잡 금융 RAG 검색: 벡터와 BM25를 RRF로 합치고 코사인 이중 게이트로 근거를 거른다"></a>
+        <ul class="chips">
+          <li>Python</li><li>FastAPI</li><li>OpenAI API</li><li>PostgreSQL(pgvector)</li><li>BM25(Kiwi)</li>
+        </ul>
+        <p class="lead">금융 질문 답변(RAG)과 소비 분석·회고 대화를 처리하는 AI 서버</p>
+        <ul class="points">
+          <li>질문 29개의 점수 분포를 실측해 유사도 하한 0.48 적용, <span class="hl">근거 없는 질문 11/14 차단</span></li>
+          <li>하한에 막힌 정답 질문은 BM25+벡터 하이브리드(RRF)로 <span class="hl">8개 모두 해결</span>, 무관한 질문 오탐은 코사인 이중 게이트로 차단</li>
+          <li>소비 분석이 틀린 금융 한도로 답하는 것을 발견해 범위 밖 질문 안내와 천·만·억 단위 <span class="hl">숫자 검사 추가</span></li>
+        </ul>
+        <a class="detail-link" href="./projects/sottaejap.html">구조도 · 검색 게이트 · 실제 응답 보기 <i class="fa-solid fa-arrow-right"></i></a>
       </article>
     </section>
 
@@ -92,7 +101,7 @@
       <h2>활동</h2>
       <ul class="plain">
         <li><strong>KB IT's Your Life 7기 수료</strong><span class="desc">2026.03 ~ 2026.08</span></li>
-        <li><strong>2026 KB IT's Your Life 해커톤 장려상</strong><span class="desc">2026.09.08 ~ 2026.09.10</span></li>
+        <li><strong>2026 KB IT's Your Life 해커톤 장려상 · 소때잡</strong><span class="desc">2026.09.08 ~ 2026.09.10</span></li>
       </ul>
     </section>
 
@@ -111,125 +120,8 @@
       </div>
     </section>
 
-    <footer>© 2026 고현석 · 화면 캡처는 실제 운영과 같은 규모의 가상 데이터로 찍었습니다.</footer>
+    <footer>© 2026 고현석</footer>
   </main>
-
-  <div class="overlay" id="overlay">
-    <div class="modal" role="dialog" aria-modal="true">
-      <button type="button" class="modal-close" id="modal-close" aria-label="닫기"><i class="fa-solid fa-xmark"></i></button>
-      <div id="modal-body"></div>
-    </div>
-  </div>
-
-  <!-- 콕찔러보기 상세 -->
-  <template id="detail-facecook">
-    <p class="eyebrow">BE 2명 / FE 2명 · 팀장, 백엔드·인프라</p>
-    <h3>콕찔러보기 — 대학 축제 소개팅 서비스</h3>
-    <p class="meta">2026.09 ~ 2026.10 · 축제 운영 09.30 ~ 10.02</p>
-
-    <div class="stats">
-      <div><b>445명</b><span>축제 3일 가입자</span></div>
-      <div><b>6,156건</b><span>주고받은 채팅 메시지</span></div>
-      <div><b>8건(0.002%)</b><span>배포 시각 외 서버 오류</span></div>
-    </div>
-
-    <p class="summary">서로 콕을 보내면 매칭되어 채팅방이 열리는 축제 소개팅 서비스입니다. 팀장으로 백엔드와 인프라(AWS 배포·운영, 부하 테스트)를 맡았습니다.</p>
-
-    <h4>트러블슈팅</h4>
-
-    <div class="ts">
-      <h5>탐색 API 응답 지연</h5>
-      <dl>
-        <dt>문제</dt><dd>900명 부하에서 응답 p95가 0.98초, 서버가 4대까지 늘었습니다.</dd>
-        <dt>판단</dt><dd>쿼리별 DB 시간을 재 보니 탐색 목록 쿼리가 DB 시간의 33%, 트랜잭션을 여닫는 명령이 약 25%를 쓰고 있었습니다.</dd>
-        <dt>기여</dt><dd>목록을 10초 캐시하고, 트랜잭션 설정 명령을 줄여 DB 명령 수를 40% 줄였습니다.</dd>
-        <dt>결과</dt><dd>p95 <b>0.98초 → 0.07초</b>, 서버 <b>4대 → 2대</b></dd>
-      </dl>
-    </div>
-
-    <div class="ts">
-      <h5>행사 콕 한도 잠금 병목</h5>
-      <dl>
-        <dt>문제</dt><dd>모든 콕이 잠금 하나를 차례로 지나가, 초당 50건에서 p95가 약 2초, 60건에서 4초를 넘었습니다.</dd>
-        <dt>판단</dt><dd>잠금 대기의 99%가 그 잠금이었고 DB CPU는 24%라, DB 부하가 아니라 잠금 시간이 문제였습니다.</dd>
-        <dt>기여</dt><dd>검사를 잠금 앞으로 옮기고 인덱스를 추가했습니다. 서버당 동시 처리 제한으로 기다리는 요청이 DB 연결을 독차지하지 않게 했습니다.</dd>
-        <dt>결과</dt><dd>처리 한계 초당 <b>40~50건 → 60~90건</b>, 몰림 중 다른 API 응답 <b>2초 → 21ms</b></dd>
-      </dl>
-    </div>
-
-    <div class="ts">
-      <h5>믿을 수 있는 배포 절차</h5>
-      <dl>
-        <dt>문제</dt><dd><code>:latest</code> 이미지를 받고 ALB healthy만 확인해, 두 서버가 다른 이미지를 받거나 새 서버가 죽어도 통과할 수 있었습니다.</dd>
-        <dt>판단</dt><dd>배포한 이미지가 정확히 무엇인지와 새 서버가 실제로 떴는지를 서버 안에서 확인해야 한다고 봤습니다.</dd>
-        <dt>기여</dt><dd>이미지를 digest로 고정하고, 테스트 통과 뒤에만 빌드하며, 서버를 한 대씩 교체해 기동을 확인한 뒤 다음 서버로 넘겼습니다.</dd>
-        <dt>결과</dt><dd>행사 중 서비스를 내리지 않고 <b>5번 배포</b>. 배포 순간 끊긴 연결 381건은 남은 과제입니다.</dd>
-      </dl>
-    </div>
-
-    <div class="ts">
-      <h5>첫날 웹 푸시 미발송 — 실패에서 배운 것</h5>
-      <dl>
-        <dt>문제</dt><dd>첫날 푸시 발송 257건이 실패했지만, 콕·채팅은 정상이라 겉으로는 드러나지 않았습니다.</dd>
-        <dt>판단</dt><dd>로그로 추적해 보니 AI 코드 변경 중 암호화 제공자 초기화 순서가 바뀐 것이 원인이었습니다. 변경 목적만 보고 리뷰해 그 줄을 놓쳤습니다.</dd>
-        <dt>기여</dt><dd>순서를 바로잡고, 제공자가 없는 상태의 첫 발송 회귀 테스트를 더했습니다.</dd>
-        <dt>결과</dt><dd>그날 밤 배포 뒤 같은 오류 <b>0건</b>. 이후 AI 변경은 diff 전체를 리뷰합니다.</dd>
-      </dl>
-    </div>
-
-    <h4>검증</h4>
-    <p class="summary">BE 테스트 455개(실제 MySQL 통합 테스트 포함) · FE 테스트 94개 · k6 부하 테스트(900명, 휴대폰 환경 600명, 1시간 연속)</p>
-  </template>
-
-  <!-- FirstFolio 상세 -->
-  <template id="detail-firstfolio">
-    <p class="eyebrow">BE 2명 / FE 2명 / AI 1명 · AI 서버 전담</p>
-    <h3>FirstFolio — 금융교육 서비스의 RAG 기반 AI 서버</h3>
-    <p class="meta">2026.07 ~ 2026.08</p>
-
-    <div class="stats">
-      <div><b>60% → 91%</b><span>쓸 수 있는 검색 근거</span></div>
-      <div><b>78문항</b><span>평가 세트(정형·일상어·홀드아웃)</span></div>
-      <div><b>474개</b><span>테스트 함수</span></div>
-    </div>
-
-    <p class="summary">금융 교과서·뉴스를 검색해 근거가 있는 퀴즈를 만들고 자동으로 검증하는 AI 서버입니다. 청킹, 하이브리드 검색, 생성·검증, 검색 품질 평가를 전담했습니다.</p>
-
-    <h4>트러블슈팅</h4>
-
-    <div class="ts">
-      <h5>검색 근거가 제목 조각으로 채워지는 문제</h5>
-      <dl>
-        <dt>문제</dt><dd>"3.2 정기적금" 같은 제목 조각이 상위에 올라, 근거 35개 중 21개만 쓸 수 있었습니다.</dd>
-        <dt>판단</dt><dd>근거 품질을 지표로 재 보니 청크의 27.8%가 조각이라, 검색이 아니라 청킹이 병목이었습니다.</dd>
-        <dt>기여</dt><dd>교과서 제목 계층을 전파하고 짧은 조각을 본문과 합치는 청커를 만들었습니다.</dd>
-        <dt>결과</dt><dd>쓸 수 있는 근거 <b>60% → 91%</b>, 벡터 검색 Hit@5 88.5% → 92.3%</dd>
-      </dl>
-    </div>
-
-    <div class="ts">
-      <h5>지표가 좋아진 가중치를 채택하지 않은 이유</h5>
-      <dl>
-        <dt>문제</dt><dd>가중치 튜닝으로 개발 세트의 지표를 모두 올린 후보를 찾았습니다.</dd>
-        <dt>판단</dt><dd>그 세트를 보면서 고른 값이라 과적합일 수 있다고 봤습니다.</dd>
-        <dt>기여</dt><dd>고를 때 쓰지 않은 별도 질문 26개를 새로 만들어 다시 측정했습니다.</dd>
-        <dt>결과</dt><dd>정답률이 <b>84.6% → 80.8%</b>로 떨어져, 운영 설정을 유지했습니다.</dd>
-      </dl>
-    </div>
-
-    <div class="ts">
-      <h5>근거에 없는 문장을 인용하는 환각</h5>
-      <dl>
-        <dt>문제</dt><dd>LLM이 근거에 없는 문장을 쓰거나, 다른 청크의 문장을 출처로 붙일 수 있었습니다.</dd>
-        <dt>판단</dt><dd>프롬프트로 부탁하는 대신, 응답 형식으로 불가능하게 만들기로 했습니다.</dd>
-        <dt>기여</dt><dd>검색된 청크의 문장만 고를 수 있는 응답 스키마를 실행 중에 만들고, 코드 규칙 → 의미 중복 → 금융 수치 → LLM 순서의 단계별 검증을 두었습니다.</dd>
-        <dt>결과</dt><dd>출처와 문장이 어긋난 근거는 <b>응답 형식상 나올 수 없게</b> 됐습니다.</dd>
-      </dl>
-    </div>
-
-    <h4>검증</h4>
-    <p class="summary">테스트 함수 474개(OpenAI·S3·MySQL은 테스트 대역) · 평가 세트 3종으로 Hit@5·MRR@5 측정 · 색인 정합성 검사(측정 중 108개 청크 누락을 발견한 뒤 누락 감지용으로 추가)</p>
-  </template>
 
   <script src="./script.js"></script>
 </body>

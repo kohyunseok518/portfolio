@@ -104,6 +104,7 @@ h2 {
 .links a { color: var(--accent); text-decoration: none; font-weight: 600; }
 .links a:hover { text-decoration: underline; }
 
+.lead { margin: 0 0 10px; font-weight: 600; }
 .points { margin: 0 0 16px; padding-left: 18px; }
 .points li { margin-bottom: 4px; }
 .points li::marker { color: var(--accent); }

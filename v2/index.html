@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>고현석 | 백엔드 개발자 포트폴리오</title>
-  <meta name="description" content="가입자 445명이 이용한 대학 축제 서비스를 개발·운영한 백엔드 개발자 고현석의 포트폴리오">
+  <meta name="description" content="가입자 445명이 쓴 대학 축제 소개팅 서비스를 설계·배포·운영한 백엔드 개발자 고현석의 포트폴리오">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="./style.css">
@@ -24,60 +24,44 @@
       </div>
     </header>
 
-    <p class="intro">가입자 445명이 이용한 대학 축제 서비스를 <b>팀장으로 개발·운영한 백엔드 개발자</b>입니다. 느린 응답과 동시 요청 문제를 측정해서 고쳤고, RAG 기반 AI 서버에서는 검색 근거의 품질을 지표로 재며 개선했습니다.</p>
-
-    <nav class="highlights" aria-label="대표 성과">
-      <a href="./projects/facecook.html">
-        <span class="tag real">실제 운영</span>
-        <b>가입자 445명</b>
-        <span class="what">축제 3일 운영, 배포 시각 제외 서버 오류 0.002%</span>
-        <span class="go">콕찔러보기 보기 →</span>
-      </a>
-      <a href="./projects/facecook.html#exp-explore">
-        <span class="tag test">부하 테스트</span>
-        <b>0.98초 → 0.07초</b>
-        <span class="what">900명이 동시에 쓸 때 느린 쪽 5% 응답 시간, 필요한 서버 4대 → 2대</span>
-        <span class="go">줄인 과정 보기 →</span>
-      </a>
-      <a href="./projects/firstfolio.html">
-        <span class="tag eval">평가</span>
-        <b>60% → 91%</b>
-        <span class="what">AI가 만든 퀴즈에 쓸 수 있는 근거의 비율</span>
-        <span class="go">FirstFolio 보기 →</span>
-      </a>
-    </nav>
+    <section class="intro">
+      <h2>짧은 소개</h2>
+      <p>가입자 445명이 쓴 대학 축제 소개팅 서비스를 직접 설계·배포·운영한 백엔드 개발자, 고현석입니다.</p>
+      <p><span class="hl">부하·동시성·배포 안정성</span> 문제를 실제 트래픽에서 측정하고 재현해서 해결했고, <span class="hl">RAG 기반 AI 서버</span>에서는 검색·근거 품질을 지표로 재며 개선했습니다.</p>
+      <p>지표가 좋아 보여도 다시 검증하는 습관으로, 팀이 믿고 배포할 수 있는 코드를 만들고 싶습니다.</p>
+    </section>
 
     <section>
       <h2>프로젝트</h2>
-      <p class="section-note">각 프로젝트의 큰 버튼을 누르면 화면, 구조도, 측정 표와 해결 과정을 볼 수 있습니다.</p>
 
       <article class="card" id="facecook">
-        <p class="meta">2026.09 ~ 2026.10 · BE 2명 / FE 2명 · 팀장, 백엔드·인프라</p>
+        <p class="period">2026.09 ~ 2026.10 · BE 2명 / FE 2명</p>
         <h3>콕찔러보기 — 대학 축제 소개팅 서비스</h3>
-        <p class="what">서로 "콕"을 보내면 매칭되어 채팅방이 열리는 서비스입니다. 축제 3일 동안 실제로 운영했습니다.</p>
+        <p class="where">팀장, 백엔드·인프라</p>
         <a class="preview" href="./projects/facecook.html">
           <div class="phones">
             <img src="../img/facecook/screen-main.png" alt="홈 화면" loading="lazy">
             <img src="../img/facecook/screen-explore.png" alt="참가자 탐색 화면" loading="lazy">
             <img src="../img/facecook/screen-chat.png" alt="채팅 화면" loading="lazy">
           </div>
-          <span class="hint">눌러서 자세히 보기</span>
         </a>
-        <ul class="results">
-          <li><span class="tag real">실제 운영</span><span>축제 3일, 가입자 <b>445명</b> · 매칭 <b>463건</b> · 채팅 <b>6,156건</b>. 배포 시각을 뺀 서버 오류 <b>0.002%</b></span></li>
-          <li><span class="tag test">부하 테스트</span><span>900명 + 채팅 450명 조건에서 느린 쪽 5% 응답 시간 <b>0.98초 → 0.07초</b>, 필요한 서버 <b>4대 → 2대</b></span></li>
-          <li><span class="tag real">실제 운영</span><span>행사 중 서버를 한 대씩 바꿔 <b>5번 배포</b>. 배포 순간 연결 끊김 381건은 개선 과제로 기록</span></li>
-        </ul>
-        <a class="cta" href="./projects/facecook.html"><span class="label">응답 지연과 동시 요청 문제를 해결한 과정 보기<small>화면 · 구조도 · 전후 비교 표</small></span><i class="fa-solid fa-arrow-right"></i></a>
         <ul class="chips">
           <li>Java 21</li><li>Spring Boot 3</li><li>JPA</li><li>MySQL</li><li>Redis</li><li>WebSocket(STOMP)</li><li>AWS</li><li>GitHub Actions</li>
         </ul>
+        <p class="lead">축제 3일 운영, 가입자 <span class="hl">445명</span> · 매칭 <span class="hl">463건</span> · 채팅 <span class="hl">6,156건</span></p>
+        <ul class="points">
+          <li>쿼리별 DB 시간을 재서 탐색 목록 10초 캐시·DB 명령 40% 축소, 900명 부하에서 <span class="hl">p95 0.98초 → 0.07초, 서버 4대 → 2대</span></li>
+          <li>콕 한도 잠금의 대기를 분석해 검사를 잠금 앞으로 옮기고 인덱스 추가, <span class="hl">처리 한계 초당 40~50건 → 60~90건</span></li>
+          <li>GitHub Actions + SSM으로 이미지 digest를 고정한 롤링 배포, <span class="hl">행사 중 서비스를 내리지 않고 5번 배포</span>(배포 순간 연결 끊김 381건은 개선 과제)</li>
+          <li>첫날 웹 푸시 미발송을 로그로 추적해 약 10시간 만에 수정, 3일간 <span class="hl">서버 오류 0.002%</span>(배포 시각 제외)</li>
+        </ul>
+        <a class="cta" href="./projects/facecook.html"><span>자세히 보기<small>화면 · 구조도 · 전후 비교 표</small></span><i class="fa-solid fa-arrow-right"></i></a>
       </article>
 
       <article class="card" id="firstfolio">
-        <p class="meta">2026.07 ~ 2026.08 · BE 2명 / FE 2명 / AI 1명 · AI 서버 전담</p>
+        <p class="period">2026.07 ~ 2026.08 · BE 2명 / FE 2명 / AI 1명</p>
         <h3>FirstFolio — 금융교육 서비스의 RAG 기반 AI 서버</h3>
-        <p class="what">금융 교과서와 뉴스에서 근거를 찾아, 그 근거만으로 퀴즈를 만들고 검증하는 AI 서버입니다.</p>
+        <p class="where">AI 서버 전담</p>
         <a class="preview" href="./projects/firstfolio.html">
           <div class="quiz">
             <p class="q">주식회사의 주주는 자신의 출자한 자본액을 초과하여 경제적 책임을 질 수 있는가?</p>
@@ -89,39 +73,43 @@
             </ol>
             <div class="src"><b>근거</b> "주식회사의 주주는 출자한 자본액의 한도 내에서만 경제적 책임을 부담하게 되는데, 이를 유한책임이라고 부른다." (저축, 금융투자 4장)</div>
           </div>
-          <span class="hint">AI가 실제로 만든 문항 · 눌러서 자세히 보기</span>
+          <span class="cap">AI가 실제로 만든 문항과 근거 문장</span>
         </a>
-        <ul class="results">
-          <li><span class="tag eval">평가</span><span>교과서를 나누는 방식을 고쳐, 퀴즈에 쓸 수 있는 근거가 35개 중 <b>21개 → 32개(60% → 91%)</b></span></li>
-          <li><span class="tag eval">재검증</span><span>연습용 질문에서 좋아 보인 설정을 처음 보는 질문 26개로 다시 재니 정답 근거를 <b>22개 → 21개</b>로 덜 찾아, 채택하지 않음</span></li>
-        </ul>
-        <a class="cta" href="./projects/firstfolio.html"><span class="label">좋아 보인 설정을 채택하지 않은 이유 보기<small>처리 흐름 · 실험 표 · 실제 생성 문항</small></span><i class="fa-solid fa-arrow-right"></i></a>
         <ul class="chips">
           <li>Python</li><li>FastAPI</li><li>OpenAI API</li><li>LangChain</li><li>BM25(Kiwi)</li><li>FAISS</li><li>MySQL</li><li>S3</li>
         </ul>
+        <p class="lead">금융 교과서·뉴스 RAG 기반 퀴즈 등 콘텐츠 생성 서버</p>
+        <ul class="points">
+          <li>퀴즈 근거가 제목 조각으로 잘리는 원인을 청킹에서 찾아 교과서 구조 기반 병합, <span class="hl">쓸 수 있는 근거 60% → 91%</span></li>
+          <li>개발 세트 지표를 올린 가중치 후보를 별도 질문 26개로 재검증, <span class="hl">Hit@5 84.6% → 80.8% 하락</span>을 확인해 채택하지 않음</li>
+          <li>검색된 청크의 문장만 고르게 하는 응답 스키마와 4단계 검증(코드 → 의미 중복 → 수치 → LLM)으로 <span class="hl">근거 없는 인용 차단</span></li>
+        </ul>
+        <a class="cta" href="./projects/firstfolio.html"><span>자세히 보기<small>처리 흐름 · 실험 표 · 생성 예시</small></span><i class="fa-solid fa-arrow-right"></i></a>
       </article>
 
       <article class="card" id="sottaejap">
-        <p class="meta">2026.09 · BE 2명 / FE 2명 / AI 1명 · AI 서버 담당</p>
-        <h3>소때잡 — 소비 회고 서비스의 AI 챗봇 서버 <span class="badge-award">해커톤 장려상</span></h3>
-        <p class="what">소비를 대화로 돌아보고, 금융 질문에 근거 문서로 답하는 챗봇의 AI 서버입니다.</p>
+        <p class="period">2026.09 · BE 2명 / FE 2명 / AI 1명</p>
+        <h3>소때잡 — 소비 회고 서비스의 AI 챗봇 서버</h3>
+        <p class="where">AI 서버 담당 · 2026 KB IT's Your Life 해커톤 장려상</p>
         <a class="preview" href="./projects/sottaejap.html">
           <div class="chat">
             <div class="me">적금이란?</div>
-            <div class="bot">적금은 계약금액과 계약기간을 정하고, 예금주가 일정 금액을 정기적으로 납입하면 만기에 계약금액을 지급하는 적립식 예금이에요.<small>근거 문서를 찾은 경우</small></div>
+            <div class="bot">적금은 계약금액과 계약기간을 정하고, 예금주가 일정 금액을 정기적으로 납입하면 만기에 계약금액을 지급하는 적립식 예금이에요.</div>
             <div class="me">김치찌개는 뭐임</div>
-            <div class="bot">확인할 수 있는 금융 자료를 찾지 못했어요. 다른 질문으로 다시 물어봐 주세요.<small>근거가 없으면 지어내지 않고 모른다고 답함</small></div>
+            <div class="bot">확인할 수 있는 금융 자료를 찾지 못했어요. 다른 질문으로 다시 물어봐 주세요.</div>
           </div>
-          <span class="hint">실제 응답 · 눌러서 자세히 보기</span>
+          <span class="cap">실제 응답 — 근거가 없으면 지어내지 않고 모른다고 답함</span>
         </a>
-        <ul class="results">
-          <li><span class="tag eval">재현 검증</span><span>1차: 자료에 없는 질문 14개 중 <b>11개</b>에 답하지 않게 검색 기준을 정함</span></li>
-          <li><span class="tag eval">재현 검증</span><span>후속: 그 기준에 같이 막힌 정답 질문 <b>8개를 모두</b> 다시 찾게 함(일부 문서 보강)</span></li>
-        </ul>
-        <a class="cta" href="./projects/sottaejap.html"><span class="label">AI가 모르는 건 모른다고 하게 만든 과정 보기<small>구조도 · 검색 기준 · 실제 응답</small></span><i class="fa-solid fa-arrow-right"></i></a>
         <ul class="chips">
           <li>Python</li><li>FastAPI</li><li>OpenAI API</li><li>PostgreSQL(pgvector)</li><li>BM25(Kiwi)</li>
         </ul>
+        <p class="lead">금융 질문 답변(RAG)과 소비 분석·회고 대화를 처리하는 AI 서버</p>
+        <ul class="points">
+          <li>질문 29개의 점수 분포를 실측해 유사도 하한 0.48 적용, <span class="hl">근거 없는 질문 11/14 차단</span></li>
+          <li>하한에 막힌 정답 질문은 BM25+벡터 하이브리드(RRF)와 문서 보강으로 <span class="hl">8개 모두 해결</span>, 무관한 질문 오탐은 코사인 이중 게이트로 차단</li>
+          <li>소비 분석이 틀린 금융 한도로 답하는 것을 발견해 범위 밖 질문 안내와 천·만·억 단위 <span class="hl">숫자 검사 추가</span></li>
+        </ul>
+        <a class="cta" href="./projects/sottaejap.html"><span>자세히 보기<small>구조도 · 검색 기준 · 실제 응답</small></span><i class="fa-solid fa-arrow-right"></i></a>
       </article>
     </section>
 
@@ -161,5 +149,6 @@
 
     <footer>© 2026 고현석</footer>
   </main>
+
 </body>
 </html>

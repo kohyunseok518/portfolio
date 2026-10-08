@@ -344,6 +344,7 @@ table.cmp .bad { color: #c2410c; font-weight: 700; }
 /* ===== v2: 상세 페이지 ===== */
 .key { margin: 0 0 10px; padding: 10px 14px; border-radius: 10px; background: var(--accent-soft); font-size: 15.5px; }
 .key b { color: var(--hl); }
+img.avatar { object-fit: cover; object-position: center 20%; background: none; }
 .why { margin: 0 0 12px; font-size: 15.5px; color: var(--sub); }
 .why b { color: var(--text); margin-right: 4px; }
 .gloss { color: var(--sub); font-size: 14.5px; margin: 4px 0 10px; }

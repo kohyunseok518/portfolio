@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FirstFolio AI | 고현석 포트폴리오</title>
+  <meta name="description" content="금융 교과서·뉴스 RAG 기반 퀴즈 생성 AI 서버의 검색 품질 개선과 근거 검증 기록">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <main class="page">
+    <a class="back" href="../index.html#firstfolio"><i class="fa-solid fa-arrow-left"></i> 프로젝트 목록으로</a>
+
+    <header class="proj-head">
+      <p class="eyebrow">PROJECT 2 · AI 서버 전담</p>
+      <h1>FirstFolio — 금융교육 서비스의 RAG 기반 AI 서버</h1>
+      <p class="one">금융 교과서와 뉴스에서 근거를 찾아, 그 근거만으로 퀴즈를 만들고 검증한 뒤 메인 서버에 넘깁니다.</p>
+
+      <div class="glance">
+        <h2>한눈에 보기</h2>
+        <p class="role"><b>맡은 일</b> AI 서버를 혼자 맡았습니다(팀 5명 중 AI 1명). 문서 나누기(청킹), 검색, 퀴즈 생성과 검증, 검색 품질 평가, 메인 서버(Spring) 연동까지 담당했습니다.</p>
+        <ul class="results">
+          <li><span class="tag eval">평가</span><span>7개 주제의 검색 근거 35개 중 퀴즈에 쓸 수 있는 근거 <b>21개 → 32개(60% → 91%)</b></span></li>
+          <li><span class="tag eval">평가</span><span>평가 질문 26개에서 의미 검색이 정답 근거를 상위 5개 안에 찾은 비율 <b>88.5% → 92.3%</b></span></li>
+          <li><span class="tag eval">재검증</span><span>연습용 질문에서 좋아 보인 설정을 처음 보는 질문 26개로 다시 재니 정답 근거를 <b>22개 → 21개</b>로 덜 찾아, 채택하지 않음</span></li>
+          <li><span class="tag eval">설계</span><span>LLM이 근거에 없는 문장을 인용할 수 없도록 <b>응답 형식</b>으로 막고, 네 단계로 다시 검사</span></li>
+        </ul>
+      </div>
+
+      <table class="overview">
+        <tr><th>기간</th><td>2026.07 ~ 2026.08</td></tr>
+        <tr><th>인원</th><td>BE 2명 / FE 2명 / AI 1명</td></tr>
+        <tr><th>스택</th><td>Python 3.12, FastAPI, OpenAI API(gpt-4o-mini, text-embedding-3-small), LangChain, Kiwi + BM25, FAISS, MySQL 8.0, S3, Docker</td></tr>
+        <tr><th>링크</th><td><a href="https://github.com/KB7-25-2/FirstFolio-AI">AI Server</a><a href="https://github.com/KB7-25-2/FirstFolio-BE">Backend</a><a href="https://github.com/KB7-25-2/FirstFolio-FE">Frontend</a></td></tr>
+      </table>
+
+      <nav class="toc" aria-label="이 페이지 목차">
+        <a href="#resume">이력서에 적은 내용</a><a href="#example">실제 생성 문항</a><a href="#work">해결 과정</a><a href="#arch">구조</a><a href="#verify">검증</a><a href="#limits">남은 한계</a>
+      </nav>
+    </header>
+
+    <section id="resume">
+      <h2>이력서에 적은 내용</h2>
+      <ul class="resume-lines">
+        <li>퀴즈 근거가 제목 조각으로 잘리는 원인을 청킹에서 찾아 교과서 구조 기반 병합, 쓸 수 있는 근거 60% → 91%</li>
+        <li>개발 세트 지표를 올린 가중치 후보를 별도 질문 26개로 재검증, Hit@5 84.6% → 80.8% 하락을 확인해 채택하지 않음</li>
+        <li>검색된 청크의 문장만 고르게 하는 응답 스키마와 4단계 검증(코드 → 의미 중복 → 수치 → LLM)으로 근거 없는 인용 차단</li>
+      </ul>
+      <p class="gloss">청크: 검색하기 좋게 잘라 둔 문서 조각. Hit@5: 검색 상위 5개 안에 정답 근거가 들어 있는 비율.</p>
+    </section>
+
+    <section id="example">
+      <h2>실제 생성 문항</h2>
+      <p class="key"><b>핵심</b> 정답의 근거가 된 교과서 문장이 문항과 함께 저장됩니다. 근거 문장은 검색된 문서에 실제로 있는 문장 중에서만 고를 수 있습니다.</p>
+      <div class="quiz">
+        <p class="q">주식회사의 주주는 자신의 출자한 자본액을 초과하여 경제적 책임을 질 수 있는가?</p>
+        <ol>
+          <li>상황에 따라 다르다.</li>
+          <li>예, 주주는 항상 모든 부채에 대해 책임을 진다.</li>
+          <li class="ok">아니다, 주주는 출자한 자본액의 한도 내에서만 책임을 진다. (정답)</li>
+          <li>아니다, 주주는 지분의 비율에 따라 책임을 진다.</li>
+        </ol>
+        <div class="src"><b>근거</b> 저축, 금융투자 4장 · 주식의 개념 (청크 84:34)<br>"주식회사의 주주는 출자한 자본액의 한도 내에서만 경제적 책임을 부담하게 되는데, 이를 유한책임(limited liability)이라고 부른다."</div>
+        <div class="checks"><span>형식</span><span>정답</span><span>인용</span><span>근거 일치</span><span>중복 아님</span></div>
+      </div>
+      <p class="gloss">2026-08-24 배치에서 자동 검증을 통과한 문항 · SINGLE_CHOICE 유형 · gpt-4o-mini · 생성 11.3초</p>
+    </section>
+
+    <section id="work">
+      <h2>해결 과정</h2>
+
+      <article class="exp">
+        <h3>1. 검색 근거가 제목 조각으로 채워지는 문제 — 청킹에서 원인 찾기</h3>
+        <p class="tagline">근거 품질 지표 · 문서 유형별 청커 · 재측정</p>
+        <div class="result"><span class="tag eval">평가</span> 퀴즈에 쓸 수 있는 근거 <b>35개 중 21개 → 32개(60% → 91%)</b></div>
+        <dl>
+          <dt>문제</dt><dd>퀴즈 근거로 뽑힌 상위 청크에 "3.2 정기적금" 같은 제목 조각이 섞여, 7개 주제의 근거 35개 중 21개만 퀴즈 근거로 쓸 수 있었습니다.</dd>
+          <dt>원인</dt><dd>근거 품질을 지표로 재 보니 전체 청크의 <b>27.8%</b>가 제목·목차 같은 짧은 조각이었습니다. 검색이 아니라 문서를 나누는 방식이 병목이었습니다.</dd>
+          <dt>해결</dt><dd>교과서 번호형 제목을 청크마다 물려주고, 50자 미만이면서 문장으로 끝나지 않는 조각은 다음 본문과 합쳤습니다. 길이만 보면 짧은 완결 문장까지 합쳐지고, 문장 부호만 보면 긴 본문이 합쳐져 두 조건을 함께 씁니다.</dd>
+        </dl>
+        <div class="chunks">
+          <div class="before"><b>병합 전 (예시)</b><code>#12 "3.2 정기적금" — 제목만</code><code>#13 "1) 자유적립식" — 제목만</code><code>#14 "정기적금은 매월 일정 금액을…"</code></div>
+          <div class="after"><b>병합 후</b><code>"3.2 정기적금 / 1) 자유적립식 / 정기적금은 매월 일정 금액을…" — 제목 계층이 붙은 본문 하나</code></div>
+        </div>
+        <div class="table-wrap"><table class="cmp">
+          <tr><th>지표</th><th>병합 전</th><th>병합 후</th></tr>
+          <tr><td>전체 청크 수</td><td>1,126</td><td>831 (−26.4%)</td></tr>
+          <tr><td>쓸 수 있는 근거 (7개 주제 × 5)</td><td>21/35 (60%)</td><td class="good">32/35 (91%)</td></tr>
+          <tr><td>의미 검색 Hit@5</td><td>88.5%</td><td class="good">92.3%</td></tr>
+          <tr><td>하이브리드 MRR@5</td><td>0.8942</td><td class="good">0.9167</td></tr>
+        </table></div>
+        <p class="cmp-cap">MRR@5: 정답 근거가 몇 번째에 나왔는지를 점수로 바꾼 값(1등 1점, 2등 0.5점…). 병합으로 줄어든 청크(26.4%)가 진단한 짧은 조각 비율(27.8%)과 거의 같아, 짧은 조각 대부분이 본문과 합쳐졌습니다.</p>
+      </article>
+
+      <article class="exp">
+        <h3>2. 지표가 좋아진 설정을 채택하지 않은 이유 — 처음 보는 질문으로 재검증</h3>
+        <p class="tagline">평가 세트 설계 · Hit@5 · MRR · 과적합</p>
+        <div class="result"><span class="tag eval">재검증</span> 처음 보는 질문 26개에서 후보 설정은 정답 근거를 <b>22개 → 21개</b>로 덜 찾았습니다(Hit@5 84.6% → 80.8%). 그래서 <b>기존 설정을 유지</b>했습니다.</div>
+        <dl>
+          <dt>문제</dt><dd>교과서 용어 그대로 만든 평가 질문은 Hit@5가 이미 100%라 설정끼리 차이가 나지 않았습니다.</dd>
+          <dt>판단</dt><dd>같은 정답을 일상어로 바꾼 질문 26개(연습용)를 새로 만들어 약점이 드러나게 했고, 여기서 두 지표를 모두 올린 후보(BM25 0.8 / FAISS 0.2, RRF k=10)를 찾았습니다. 하지만 그 세트를 보면서 고른 값이라, 연습 문제에만 맞춘 결과(과적합)일 수 있었습니다.</dd>
+          <dt>검증</dt><dd>고를 때 한 번도 쓰지 않은 질문 26개(홀드아웃)를 따로 만들어, 설정을 고정한 채 다시 쟀습니다.</dd>
+        </dl>
+        <p class="table-title">검색 방식별 결과 (Hit@5: 찾았나, MRR@5: 몇 번째에 찾았나)</p>
+        <div class="table-wrap"><table class="cmp">
+          <tr><th>방식</th><th>연습용 Hit@5</th><th>연습용 MRR@5</th><th>처음 보는 질문 Hit@5</th><th>처음 보는 질문 MRR@5</th></tr>
+          <tr><td>운영 설정 (0.7 / 0.3)</td><td>92.3%</td><td>0.8109</td><td class="good">84.6% (22/26)</td><td>0.6212</td></tr>
+          <tr><td>후보 (0.8 / 0.2, k=10)</td><td class="good">96.2%</td><td class="good">0.8782</td><td class="bad">80.8% (21/26)</td><td>0.7000</td></tr>
+          <tr><td>의미 검색(FAISS) 단독</td><td>57.7%</td><td>0.4019</td><td>50.0%</td><td>0.4263</td></tr>
+        </table></div>
+        <p class="cmp-cap">후보는 찾은 것의 순위(MRR)는 올렸지만 정답 하나를 더 놓쳤습니다. 이 서비스에서 검색 실패는 곧 문항을 못 만드는 것이라 "찾았나"를 우선했습니다.</p>
+      </article>
+
+      <article class="exp">
+        <h3>3. 근거에 없는 문장을 인용하는 환각 — 형식으로 막기</h3>
+        <p class="tagline">OpenAI structured output · 동적 타입 · 단계별 검증</p>
+        <div class="result"><span class="tag eval">설계</span> 출처와 문장이 어긋난 근거는 <b>응답 형식상 나올 수 없게</b> 됐습니다.</div>
+        <dl>
+          <dt>문제</dt><dd>LLM이 근거에 없는 문장을 인용하거나, 다른 청크의 문장을 출처로 붙일 수 있었습니다.</dd>
+          <dt>해결</dt><dd>프롬프트로 부탁하는 대신, 검색이 끝난 뒤 그 청크의 키와 실제 문장만 한 쌍으로 고를 수 있는 응답 형식을 실행 중에 만들었습니다. 근거 칸을 빈칸이 아니라 객관식 보기로 만든 셈입니다. 그 위에 코드 규칙 → 의미 중복 → 금융 수치 → LLM 근거 검증 순서의 4단계 검사를 두었고, 비용이 낮은 검사부터 먼저 돌립니다.</dd>
+        </dl>
+        <figure class="fig"><a href="../../img/firstfolio/schema-guard.svg" target="_blank" rel="noopener"><img src="../../img/firstfolio/schema-guard.svg" alt="검색이 끝난 뒤 실행 중에 응답 타입을 만든다. 각 청크의 키와 그 청크에 실제로 있는 문장만 한 쌍으로 고를 수 있다" loading="lazy"></a><figcaption>그림을 누르면 크게 볼 수 있습니다.</figcaption></figure>
+        <div class="limit"><b>함께 봐야 할 한계</b> 자동 검증 통과율이 90%여도 사람이 읽어 보니 큰 수정 없이 쓸 수 있는 문항은 10개 중 2~3개였습니다. 이때 나온 실패(복수 정답, 영어 혼용, 인용이 정답을 뒷받침하지 못함, "N가지" 주장 불일치)를 하나씩 코드 규칙으로 추가했고, 메인 서버에서는 사람이 검수한 뒤 게시합니다.</div>
+      </article>
+
+      <article class="exp">
+        <h3>4. 측정 중 발견한 벡터 색인 누락</h3>
+        <p class="tagline">색인 정합성 검사</p>
+        <dl>
+          <dt>문제</dt><dd>기준선을 다시 재는 과정에서 MySQL 청크는 1,126개인데 FAISS 벡터는 1,018개인 것을 발견했습니다. 문서 하나(<b>108개 청크</b>)가 벡터 색인에서 빠져 있었고, 재색인으로 맞춘 뒤 측정했습니다.</dd>
+          <dt>해결</dt><dd>같은 누락을 다시 놓치지 않도록 MySQL 청크 수와 FAISS 벡터 수를 비교하는 검사를 넣었습니다. 서버를 시작할 때는 경고를 남기고, 품질 측정에서는 아예 멈춥니다.</dd>
+        </dl>
+      </article>
+    </section>
+
+    <section id="arch">
+      <h2>구조</h2>
+      <p class="key"><b>이 그림의 핵심</b> 제가 맡은 것은 그림 속 <b>AI Server</b> 상자입니다. 근거를 검색하고 퀴즈를 검증해 메인 서버로 전달합니다. 프론트엔드는 AI 서버를 직접 부르지 않습니다.</p>
+      <figure class="fig"><a href="../../img/firstfolio/system-architecture.png" target="_blank" rel="noopener"><img src="../../img/firstfolio/system-architecture.png" alt="FirstFolio 전체 AWS 구성. 메인 서버와 AI 서버는 내부 API로 주고받고, RDS 안에 메인 DB와 AI DB가 따로 있다" loading="lazy"></a><figcaption>전체 서비스 구성. 그림을 누르면 크게 볼 수 있습니다.</figcaption></figure>
+      <ul class="facts">
+        <li>AI는 RDS 안의 AI DB만 씁니다. 원문과 FAISS 인덱스 백업은 S3에 둡니다.</li>
+        <li>밖으로 나가는 호출은 OpenAI(생성·임베딩)와 네이버 뉴스 검색 API입니다.</li>
+      </ul>
+      <p class="key"><b>이 그림의 핵심</b> 키워드 검색(BM25)과 의미 검색(FAISS)에서 각각 20개를 받아 점수가 아닌 순위로 합치고(RRF), 상위 5개 근거만으로 퀴즈를 만듭니다.</p>
+      <figure class="fig"><a href="../../img/firstfolio/rag-pipeline.svg" target="_blank" rel="noopener"><img src="../../img/firstfolio/rag-pipeline.svg" alt="문서를 유형별로 청킹해 MySQL에 저장하고 BM25와 FAISS로 색인한다. 퀴즈를 만들 때는 두 검색 결과를 순위로 합친 상위 5개 근거만으로 생성하고 4단계 검증을 통과한 것만 Spring으로 보낸다" loading="lazy"></a></figure>
+      <p class="gloss">점수가 아닌 순위로 합치는 이유: 두 검색의 점수 단위가 달라 그대로 더할 수 없습니다. 퀴즈 검색어는 교과서 소단원 제목이라 본문 용어와 그대로 겹치는 경우가 많아 BM25 비중을 0.7로 두었습니다.</p>
+    </section>
+
+    <section id="verify">
+      <h2>검증</h2>
+      <ul class="facts">
+        <li>테스트 함수 474개(OpenAI·S3·MySQL은 테스트 대역)</li>
+        <li>평가 세트 3종 78문항(교과서 용어 26 · 일상어 26 · 처음 보는 질문 26)으로 Hit@5·MRR 측정</li>
+      </ul>
+    </section>
+
+    <section id="limits">
+      <h2>남은 한계</h2>
+      <ul class="facts">
+        <li>평가 질문이 26개라 1문항이 약 4%입니다. 문항 품질 평가도 10문항을 한 사람이 한 번 본 진단값입니다.</li>
+        <li>자동 검증을 통과해도 바로 쓸 수 있는 문항은 일부라, 메인 서버에서 사람이 검수한 뒤 게시합니다.</li>
+        <li>BM25 객체는 서버 메모리에만 있어 시작할 때마다 다시 만듭니다(청크 831개 규모에서는 몇 초).</li>
+      </ul>
+    </section>
+
+    <nav class="next-nav" aria-label="다른 페이지로">
+      <a href="../index.html#firstfolio"><small>돌아가기</small>← 프로젝트 목록으로</a>
+      <a class="next" href="./sottaejap.html"><small>다음 프로젝트</small>소때잡 — AI 챗봇 서버 →</a>
+    </nav>
+
+    <footer>© 2026 고현석</footer>
+  </main>
+</body>
+</html>

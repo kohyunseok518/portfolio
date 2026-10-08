@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>고현석 | 백엔드 개발자 포트폴리오</title>
+  <meta name="description" content="가입자 445명이 이용한 대학 축제 서비스를 개발·운영한 백엔드 개발자 고현석의 포트폴리오">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="page">
+
+    <header class="profile">
+      <div class="avatar" aria-hidden="true">고</div>
+      <div>
+        <h1>고현석 <small>KO HYUNSEOK</small></h1>
+        <p class="role">백엔드 개발자 · Java / Spring Boot</p>
+        <ul class="contacts">
+          <li><i class="fa-solid fa-envelope"></i><a href="mailto:type4416@gmail.com">type4416@gmail.com</a></li>
+          <li><i class="fa-brands fa-github"></i><a href="https://github.com/kohyunseok518">github.com/kohyunseok518</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <p class="intro">가입자 445명이 이용한 대학 축제 서비스를 <b>팀장으로 개발·운영한 백엔드 개발자</b>입니다. 느린 응답과 동시 요청 문제를 측정해서 고쳤고, RAG 기반 AI 서버에서는 검색 근거의 품질을 지표로 재며 개선했습니다.</p>
+
+    <nav class="highlights" aria-label="대표 성과">
+      <a href="./projects/facecook.html">
+        <span class="tag real">실제 운영</span>
+        <b>가입자 445명</b>
+        <span class="what">축제 3일 운영, 배포 시각 제외 서버 오류 0.002%</span>
+        <span class="go">콕찔러보기 보기 →</span>
+      </a>
+      <a href="./projects/facecook.html#exp-explore">
+        <span class="tag test">부하 테스트</span>
+        <b>0.98초 → 0.07초</b>
+        <span class="what">900명이 동시에 쓸 때 느린 쪽 5% 응답 시간, 필요한 서버 4대 → 2대</span>
+        <span class="go">줄인 과정 보기 →</span>
+      </a>
+      <a href="./projects/firstfolio.html">
+        <span class="tag eval">평가</span>
+        <b>60% → 91%</b>
+        <span class="what">AI가 만든 퀴즈에 쓸 수 있는 근거의 비율</span>
+        <span class="go">FirstFolio 보기 →</span>
+      </a>
+    </nav>
+
+    <section>
+      <h2>프로젝트</h2>
+      <p class="section-note">각 프로젝트의 큰 버튼을 누르면 화면, 구조도, 측정 표와 해결 과정을 볼 수 있습니다.</p>
+
+      <article class="card" id="facecook">
+        <p class="meta">2026.09 ~ 2026.10 · BE 2명 / FE 2명 · 팀장, 백엔드·인프라</p>
+        <h3>콕찔러보기 — 대학 축제 소개팅 서비스</h3>
+        <p class="what">서로 "콕"을 보내면 매칭되어 채팅방이 열리는 서비스입니다. 축제 3일 동안 실제로 운영했습니다.</p>
+        <a class="preview" href="./projects/facecook.html">
+          <div class="phones">
+            <img src="../img/facecook/screen-main.png" alt="홈 화면" loading="lazy">
+            <img src="../img/facecook/screen-explore.png" alt="참가자 탐색 화면" loading="lazy">
+            <img src="../img/facecook/screen-chat.png" alt="채팅 화면" loading="lazy">
+          </div>
+          <span class="hint">눌러서 자세히 보기</span>
+        </a>
+        <ul class="results">
+          <li><span class="tag real">실제 운영</span><span>축제 3일, 가입자 <b>445명</b> · 매칭 <b>463건</b> · 채팅 <b>6,156건</b>. 배포 시각을 뺀 서버 오류 <b>0.002%</b></span></li>
+          <li><span class="tag test">부하 테스트</span><span>900명 + 채팅 450명 조건에서 느린 쪽 5% 응답 시간 <b>0.98초 → 0.07초</b>, 필요한 서버 <b>4대 → 2대</b></span></li>
+          <li><span class="tag real">실제 운영</span><span>행사 중 서버를 한 대씩 바꿔 <b>5번 배포</b>. 배포 순간 연결 끊김 381건은 개선 과제로 기록</span></li>
+        </ul>
+        <a class="cta" href="./projects/facecook.html"><span class="label">응답 지연과 동시 요청 문제를 해결한 과정 보기<small>화면 · 구조도 · 전후 비교 표</small></span><i class="fa-solid fa-arrow-right"></i></a>
+        <ul class="chips">
+          <li>Java 21</li><li>Spring Boot 3</li><li>JPA</li><li>MySQL</li><li>Redis</li><li>WebSocket(STOMP)</li><li>AWS</li><li>GitHub Actions</li>
+        </ul>
+      </article>
+
+      <article class="card" id="firstfolio">
+        <p class="meta">2026.07 ~ 2026.08 · BE 2명 / FE 2명 / AI 1명 · AI 서버 전담</p>
+        <h3>FirstFolio — 금융교육 서비스의 RAG 기반 AI 서버</h3>
+        <p class="what">금융 교과서와 뉴스에서 근거를 찾아, 그 근거만으로 퀴즈를 만들고 검증하는 AI 서버입니다.</p>
+        <a class="preview" href="./projects/firstfolio.html">
+          <div class="quiz">
+            <p class="q">주식회사의 주주는 자신의 출자한 자본액을 초과하여 경제적 책임을 질 수 있는가?</p>
+            <ol>
+              <li>상황에 따라 다르다.</li>
+              <li>예, 주주는 항상 모든 부채에 대해 책임을 진다.</li>
+              <li class="ok">아니다, 주주는 출자한 자본액의 한도 내에서만 책임을 진다. (정답)</li>
+              <li>아니다, 주주는 지분의 비율에 따라 책임을 진다.</li>
+            </ol>
+            <div class="src"><b>근거</b> "주식회사의 주주는 출자한 자본액의 한도 내에서만 경제적 책임을 부담하게 되는데, 이를 유한책임이라고 부른다." (저축, 금융투자 4장)</div>
+          </div>
+          <span class="hint">AI가 실제로 만든 문항 · 눌러서 자세히 보기</span>
+        </a>
+        <ul class="results">
+          <li><span class="tag eval">평가</span><span>교과서를 나누는 방식을 고쳐, 퀴즈에 쓸 수 있는 근거가 35개 중 <b>21개 → 32개(60% → 91%)</b></span></li>
+          <li><span class="tag eval">재검증</span><span>연습용 질문에서 좋아 보인 설정을 처음 보는 질문 26개로 다시 재니 정답 근거를 <b>22개 → 21개</b>로 덜 찾아, 채택하지 않음</span></li>
+        </ul>
+        <a class="cta" href="./projects/firstfolio.html"><span class="label">좋아 보인 설정을 채택하지 않은 이유 보기<small>처리 흐름 · 실험 표 · 실제 생성 문항</small></span><i class="fa-solid fa-arrow-right"></i></a>
+        <ul class="chips">
+          <li>Python</li><li>FastAPI</li><li>OpenAI API</li><li>LangChain</li><li>BM25(Kiwi)</li><li>FAISS</li><li>MySQL</li><li>S3</li>
+        </ul>
+      </article>
+
+      <article class="card" id="sottaejap">
+        <p class="meta">2026.09 · BE 2명 / FE 2명 / AI 1명 · AI 서버 담당</p>
+        <h3>소때잡 — 소비 회고 서비스의 AI 챗봇 서버 <span class="badge-award">해커톤 장려상</span></h3>
+        <p class="what">소비를 대화로 돌아보고, 금융 질문에 근거 문서로 답하는 챗봇의 AI 서버입니다.</p>
+        <a class="preview" href="./projects/sottaejap.html">
+          <div class="chat">
+            <div class="me">적금이란?</div>
+            <div class="bot">적금은 계약금액과 계약기간을 정하고, 예금주가 일정 금액을 정기적으로 납입하면 만기에 계약금액을 지급하는 적립식 예금이에요.<small>근거 문서를 찾은 경우</small></div>
+            <div class="me">김치찌개는 뭐임</div>
+            <div class="bot">확인할 수 있는 금융 자료를 찾지 못했어요. 다른 질문으로 다시 물어봐 주세요.<small>근거가 없으면 지어내지 않고 모른다고 답함</small></div>
+          </div>
+          <span class="hint">실제 응답 · 눌러서 자세히 보기</span>
+        </a>
+        <ul class="results">
+          <li><span class="tag eval">재현 검증</span><span>1차: 자료에 없는 질문 14개 중 <b>11개</b>에 답하지 않게 검색 기준을 정함</span></li>
+          <li><span class="tag eval">재현 검증</span><span>후속: 그 기준에 같이 막힌 정답 질문 <b>8개를 모두</b> 다시 찾게 함(일부 문서 보강)</span></li>
+        </ul>
+        <a class="cta" href="./projects/sottaejap.html"><span class="label">AI가 모르는 건 모른다고 하게 만든 과정 보기<small>구조도 · 검색 기준 · 실제 응답</small></span><i class="fa-solid fa-arrow-right"></i></a>
+        <ul class="chips">
+          <li>Python</li><li>FastAPI</li><li>OpenAI API</li><li>PostgreSQL(pgvector)</li><li>BM25(Kiwi)</li>
+        </ul>
+      </article>
+    </section>
+
+    <section>
+      <h2>기술 스택</h2>
+      <table class="stack">
+        <tr><th>Language</th><td>Java, Python</td></tr>
+        <tr><th>Framework</th><td>Spring Boot, Spring Data JPA, FastAPI</td></tr>
+        <tr><th>Database</th><td>MySQL, Redis</td></tr>
+        <tr><th>AI</th><td>OpenAI API, LangChain, RAG(BM25, FAISS, pgvector)</td></tr>
+        <tr><th>Infra</th><td>AWS(EC2, ALB, Auto Scaling, RDS, ElastiCache, S3, CloudWatch), GitHub Actions, Docker</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>활동</h2>
+      <ul class="plain">
+        <li><strong>KB IT's Your Life 7기 수료</strong><span class="desc">2026.03 ~ 2026.08</span></li>
+        <li><strong>2026 KB IT's Your Life 해커톤 장려상 · 소때잡</strong><span class="desc">2026.09.08 ~ 2026.09.10</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>학력 &amp; 자격</h2>
+      <div class="two">
+        <div>
+          <h4>Certifications</h4>
+          <p><strong>SQL 개발자(SQLD)</strong><span class="desc">한국데이터산업진흥원 · 2026.06.10</span></p>
+          <p><strong>정보처리산업기사</strong><span class="desc">한국산업인력공단 · 2026.09.11</span></p>
+        </div>
+        <div>
+          <h4>Education</h4>
+          <p><strong>서일대학교</strong><span class="desc">소프트웨어공학과 졸업(전문학사) · 2021.03 ~ 2026.02</span></p>
+        </div>
+      </div>
+    </section>
+
+    <footer>© 2026 고현석</footer>
+  </main>
+</body>
+</html>

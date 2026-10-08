@@ -2,8 +2,8 @@
   --bg: #f5f6f8;
   --paper: #ffffff;
   --text: #1c1d22;
-  --sub: #5d6070;
-  --muted: #8a8d9c;
+  --sub: #4f5262;
+  --muted: #62667a;
   --line: #e6e7ec;
   --soft: #f7f8fa;
   --accent: #4f46e5;
@@ -21,8 +21,8 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
-  font-size: 15px;
+  font-family: "Pretendard Variable", "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
+  font-size: 16.5px;
   line-height: 1.75;
   word-break: keep-all;
   overflow-wrap: break-word;
@@ -64,7 +64,7 @@ a { color: inherit; }
 .profile h1 { margin: 0 0 10px; font-size: 30px; letter-spacing: -0.5px; }
 .profile h1 small { font-size: 18px; color: var(--sub); font-weight: 500; margin-left: 6px; }
 .profile .role { margin: 0 0 10px; color: var(--accent); font-weight: 600; }
-.contacts { list-style: none; margin: 0; padding: 0; font-size: 14px; }
+.contacts { list-style: none; margin: 0; padding: 0; font-size: 15px; }
 .contacts li { display: flex; gap: 10px; align-items: center; }
 .contacts i { width: 16px; color: var(--sub); text-align: center; }
 
@@ -81,7 +81,7 @@ h2 {
 
 .intro p { margin: 0 0 12px; color: #33343c; }
 
-.stack { width: 100%; border-collapse: collapse; font-size: 14px; }
+.stack { width: 100%; border-collapse: collapse; font-size: 16px; }
 .stack th { width: 150px; text-align: left; padding: 7px 10px; vertical-align: top; color: var(--text); }
 .stack td { padding: 7px 10px; color: #3b3d46; }
 
@@ -93,12 +93,12 @@ h2 {
   margin-bottom: 22px;
 }
 
-.card .period { color: var(--muted); font-size: 13px; margin: 0; }
+.card .period { color: var(--muted); font-size: 14.5px; margin: 0; }
 .card h3 { margin: 4px 0 2px; font-size: 21px; letter-spacing: -0.3px; }
-.card .where { margin: 0 0 12px; color: var(--sub); font-size: 14px; font-style: italic; }
+.card .where { margin: 0 0 14px; color: var(--sub); font-size: 15px; font-weight: 600; }
 
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; padding: 0; list-style: none; }
-.chips li { background: var(--chip); color: #fff; font-size: 12px; padding: 2px 9px; border-radius: 6px; }
+.chips li { background: var(--chip); color: #fff; font-size: 13px; padding: 2px 9px; border-radius: 6px; }
 
 .links { display: flex; flex-wrap: wrap; gap: 14px; margin: 0 0 12px; font-size: 14px; }
 .links a { color: var(--accent); text-decoration: none; font-weight: 600; }
@@ -321,4 +321,49 @@ table.cmp .bad { color: #c2410c; font-weight: 700; }
   table.cmp { font-size: 12px; }
   table.cmp th, table.cmp td { padding: 6px 5px; }
   .overview th { width: 70px; }
+}
+
+/* ===== 메인 카드 예시 화면과 큰 버튼 ===== */
+.preview { display: block; text-decoration: none; color: inherit; margin: 4px 0 16px; }
+.preview .cap { display: block; margin-top: 6px; color: var(--muted); font-size: 14px; }
+.phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; background: var(--soft); border-radius: 12px; padding: 14px; }
+.phones img { width: 100%; border-radius: 12px; border: 1px solid var(--line); display: block; }
+.preview .quiz { margin: 0; }
+.preview .chat { margin: 0; }
+.cta {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  width: 100%; margin-top: 4px;
+  background: var(--accent); color: #fff; text-decoration: none;
+  font-size: 17px; font-weight: 700; padding: 14px 18px; border-radius: 12px;
+}
+.cta:hover { background: #4338ca; }
+.cta span { text-align: center; line-height: 1.4; }
+.cta small { display: block; font-weight: 500; font-size: 14px; opacity: 0.9; }
+.points li { font-size: 16px; }
+
+/* ===== 상세 페이지 ===== */
+.key { margin: 0 0 10px; padding: 10px 14px; border-radius: 10px; background: var(--accent-soft); font-size: 15.5px; }
+.key b { color: var(--hl); }
+img.avatar { width: 108px; height: 139px; border-radius: 10px; border: 1px solid var(--line); object-fit: cover; background: #fff; }
+.why { margin: 0 0 12px; font-size: 15.5px; color: var(--sub); }
+.why b { color: var(--text); margin-right: 4px; }
+.gloss { color: var(--sub); font-size: 14.5px; margin: 4px 0 10px; }
+.table-title { margin: 14px 0 0; font-weight: 700; font-size: 15px; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 10px 0 14px; }
+.table-wrap table.cmp { margin: 0; min-width: 480px; }
+.exp dd { font-size: 15.5px; }
+figure.fig figcaption, .page .note, .cmp-cap { color: var(--muted); font-size: 14px; }
+.next-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 48px; }
+.next-nav a { display: block; text-decoration: none; border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; font-weight: 700; }
+.next-nav a:hover { border-color: var(--accent); background: var(--accent-soft); }
+.next-nav a small { display: block; color: var(--muted); font-weight: 500; font-size: 14px; }
+.next-nav a.next { text-align: right; background: var(--accent); color: #fff; border-color: var(--accent); }
+.next-nav a.next small { color: #e4e2ff; }
+
+@media (max-width: 720px) {
+  .avatar { width: 64px; height: 64px; font-size: 26px; }
+  img.avatar { width: 72px; height: 93px; border-radius: 8px; }
+  .phones { gap: 8px; padding: 10px; }
+  .next-nav { grid-template-columns: 1fr; }
+  .next-nav a.next { text-align: left; }
 }

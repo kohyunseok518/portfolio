@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FirstFolio AI | 고현석 포트폴리오</title>
   <meta name="description" content="금융 교과서·뉴스 RAG 기반 퀴즈 생성 AI 서버의 검색 품질 개선과 근거 검증 기록">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
   <main class="page">
-    <a class="back" href="../index.html"><i class="fa-solid fa-arrow-left"></i> 포트폴리오로 돌아가기</a>
+    <a class="back" href="../index.html#firstfolio"><i class="fa-solid fa-arrow-left"></i> 포트폴리오로 돌아가기</a>
 
     <header class="proj-head">
       <p class="eyebrow">PROJECT 2 · AI 서버 전담</p>
@@ -33,6 +34,7 @@
 
     <section>
       <h2>시스템 아키텍처</h2>
+      <p class="key"><b>이 그림의 핵심</b> 제가 맡은 것은 그림 속 <b>AI Server</b> 상자입니다. 근거를 검색하고 퀴즈를 검증해 메인 서버로 전달합니다.</p>
       <figure class="fig"><img src="../img/firstfolio/system-architecture.png" alt="FirstFolio 전체 AWS 구성. Vue 프론트엔드가 ALB를 거쳐 Spring 메인 서버를 부르고, 메인 서버와 AI 서버는 내부 API로 주고받는다. RDS 안에 메인 DB와 AI DB가 따로 있다"><figcaption>전체 서비스 구성. 이 중 AI Server를 맡았습니다.</figcaption></figure>
       <ul class="limits">
         <li>프론트엔드는 AI 서버를 직접 부르지 않습니다. 메인 서버와 내부 API로만 주고받습니다.</li>
@@ -55,20 +57,20 @@
         <p class="tag">근거 품질 지표 · 문서 유형별 청커 · 재측정</p>
         <dl>
           <dt>문제</dt><dd>퀴즈 근거로 뽑힌 상위 청크에 "3.2 정기적금" 같은 제목 조각이 섞여, 7개 주제의 근거 35개 중 21개만 퀴즈 근거로 쓸 수 있었습니다.</dd>
-          <dt>원인</dt><dd>근거 품질을 지표로 재 보니 전체 청크의 <b>27.8%</b>가 제목·목차 같은 짧은 조각이었습니다. 검색이 아니라 청킹이 병목이었습니다.</dd>
+          <dt>원인</dt><dd>근거 품질을 지표로 재 보니 전체 청크(검색하기 좋게 잘라 둔 문서 조각)의 <b>27.8%</b>가 제목·목차 같은 짧은 조각이었습니다. 검색이 아니라 청킹이 병목이었습니다.</dd>
           <dt>해결</dt><dd>교과서 번호형 제목을 청크마다 물려주고, 50자 미만이면서 문장으로 끝나지 않는 조각은 다음 본문과 합쳤습니다. 길이만 보면 짧은 완결 문장까지 합쳐지고, 문장 부호만 보면 긴 본문이 합쳐져 두 조건을 함께 씁니다.</dd>
         </dl>
         <div class="chunks">
           <div class="before"><b>병합 전 (예시)</b><code>#12 "3.2 정기적금" — 제목만</code><code>#13 "1) 자유적립식" — 제목만</code><code>#14 "정기적금은 매월 일정 금액을…"</code></div>
           <div class="after"><b>병합 후</b><code>"3.2 정기적금 / 1) 자유적립식 / 정기적금은 매월 일정 금액을…" — 제목 계층이 붙은 본문 하나</code></div>
         </div>
-        <table class="cmp">
+        <div class="table-wrap"><table class="cmp">
           <tr><th>지표</th><th>병합 전</th><th>병합 후</th></tr>
           <tr><td>전체 청크 수</td><td>1,126</td><td>831 (−26.4%)</td></tr>
           <tr><td>쓸 수 있는 근거 (7개 주제 × 5)</td><td>21/35 (60%)</td><td class="good">32/35 (91%)</td></tr>
           <tr><td>벡터 검색 Hit@5</td><td>88.5%</td><td class="good">92.3%</td></tr>
           <tr><td>하이브리드 MRR@5</td><td>0.8942</td><td class="good">0.9167</td></tr>
-        </table>
+        </table></div>
         <div class="result">병합으로 줄어든 청크(26.4%)가 진단한 짧은 조각 비율(27.8%)과 거의 같아, 짧은 조각 대부분이 본문과 합쳐졌습니다.</div>
       </article>
 
@@ -80,12 +82,13 @@
           <dt>판단</dt><dd>같은 정답을 일상어로 바꾼 질문 26개를 새로 만들어 약점이 드러나게 했고, 여기서 두 지표를 모두 올린 후보(BM25 0.8 / FAISS 0.2, RRF k=10)를 찾았습니다. 하지만 그 세트를 보면서 고른 값이라 과적합일 수 있었습니다.</dd>
           <dt>검증</dt><dd>고를 때 한 번도 쓰지 않은 질문 26개를 따로 만들어, 설정을 고정한 채 다시 쟀습니다.</dd>
         </dl>
-        <table class="cmp">
+        <p class="gloss">Hit@5: 검색 상위 5개 안에 정답 근거가 있는 비율("찾았나"). MRR@5: 정답 근거가 몇 번째에 나왔는지를 점수로 바꾼 값("몇 등에 찾았나").</p>
+        <div class="table-wrap"><table class="cmp">
           <tr><th>방식</th><th>일상어 세트 Hit@5</th><th>일상어 MRR@5</th><th>홀드아웃 Hit@5</th><th>홀드아웃 MRR@5</th></tr>
           <tr><td>운영 설정 (0.7 / 0.3)</td><td>92.3%</td><td>0.8109</td><td class="good">84.6% (22/26)</td><td>0.6212</td></tr>
           <tr><td>후보 (0.8 / 0.2, k=10)</td><td class="good">96.2%</td><td class="good">0.8782</td><td class="bad">80.8% (21/26)</td><td>0.7000</td></tr>
           <tr><td>FAISS 단독</td><td>57.7%</td><td>0.4019</td><td>50.0%</td><td>0.4263</td></tr>
-        </table>
+        </table></div>
         <div class="result">후보는 홀드아웃에서 정답을 하나 더 놓쳤습니다(<b>84.6% → 80.8%</b>). 이 서비스에서 검색 실패는 곧 문항 생성 실패라 순위(MRR)보다 찾기(Hit@5)를 우선해 <b>운영 설정을 유지</b>했습니다.</div>
       </article>
 
@@ -136,6 +139,11 @@
         <li>BM25 객체는 서버 메모리에만 있어 시작할 때마다 다시 만듭니다(청크 831개 규모에서는 몇 초).</li>
       </ul>
     </section>
+
+    <nav class="next-nav" aria-label="다른 페이지로">
+      <a href="../index.html#firstfolio"><small>돌아가기</small>← 프로젝트 목록으로</a>
+      <a class="next" href="./sottaejap.html"><small>다음 프로젝트</small>소때잡 — AI 챗봇 서버 →</a>
+    </nav>
 
     <footer>© 2026 고현석</footer>
   </main>
